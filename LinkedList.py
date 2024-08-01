@@ -56,5 +56,52 @@ class LinkedList:
             self.head = newNpde
         self.length += 1
         return True
+    
+    def pop_first(self):
+        if self.length == 0:
+            return None
+        removed_node = self.head
+        new_head = self.head.next
+        self.head.next = None
+        self.head = new_head
+        self.length -= 1
+        if self.length == 0:
+            self.tail = None
+        return removed_node 
+    
+    def get(self, index):
+        #get object at specific index and return object
+        if self.length == 0:
+            print("empty list: unable to return item")
+            return None
+        index_node = self.head
+        if index == 0:
+            return index_node
+        count = 0
+        while index_node.next is not None:
+            count +=1
+            if count == index:
+                return index_node.next
+            index_node = index_node.next
+        print("error 419: index out of bounds")
+        return None
+    
+    # Better way to write GET method
+        # def get(self, index):
+        # if index < 0 or index >= self.length:
+        #     return None
+        # temp = self.head
+        # for _ in range(index):
+        #     temp = temp.next
+        # return temp
         
+    def set_value(self, index, value):
+        if index < 0 or index >= self.length:
+            return False
+        temp = self.head
+        for _ in range(index):
+            temp = temp.next
+        temp.value = value
+        return True
+
             
